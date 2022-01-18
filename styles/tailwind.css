@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.input{
+   @apply border-2 border-teal-500 p-2 w-full font-bold rounded-xl shadow focus:outline-none focus:border-4 focus:border-teal-800 my-2
+}
+
+label{
+   @apply lg:text-xl text-sm font-bold capitalize my-2
+}
+
+.regBtn{
+   @apply w-full border-4 border-teal-800 p-2 mt-7 rounded-xl cursor-pointer shadow text-center font-bold capitalize text-sm lg:text-xl hover:bg-teal-800 tracking-wider hover:text-gray-100
+}
