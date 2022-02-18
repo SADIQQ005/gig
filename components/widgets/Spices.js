@@ -1,37 +1,39 @@
 import React from "react";
 import Link from "next/link";
 
-export default function Popular() {
+function Spices() {
   const cards = [
     {
-      id: "1",
-      title: "burger",
-      price: "1000",
-      thumbnail: "./images/product.jpg",
-    },
-    {
       id: "2",
-      title: "pasta",
-      price: "1000",
+      title: "fisheries",
       thumbnail: "./images/product2.jpg",
     },
     {
       id: "3",
-      title: "salad",
-      price: "1000",
+      title: "groceries",
+      thumbnail: "./images/product3.jpg",
+    },
+    {
+      id: "4",
+      title: "fisheries",
+      thumbnail: "./images/product2.jpg",
+    },
+    {
+      id: "5",
+      title: "groceries",
       thumbnail: "./images/product3.jpg",
     },
   ];
   return (
-    <div className="grid grid-cols-3 md:gap-6 gap-2">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
       {cards &&
         cards.map((card) => {
           return (
-            <Link href="/id">
-              <a key={card.id}>
-                <div className="w-30 shadow-md cursor-pointer rounded-t-xl">
+            <Link href="/id" key={card.id}>
+              <a>
+                <div className="w-30 cursor-pointer">
                   <img
-                    className="md:h-96 h-20 w-full rounded-t-xl"
+                    className="md:h-96 h-56 w-full"
                     src={card.thumbnail}
                     alt="product"
                   />
@@ -51,3 +53,5 @@ export default function Popular() {
     </div>
   );
 }
+
+export default Spices;

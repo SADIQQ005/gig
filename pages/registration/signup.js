@@ -72,7 +72,7 @@ export default function () {
             <input
               type="password"
               onChange={(e) => setConfirmPassword(e.target.value)}
-              placeholder="Password"
+              placeholder="Confirm Password"
               className="input"
             />
           </div>
