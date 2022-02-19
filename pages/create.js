@@ -4,8 +4,8 @@ import { useProduct } from "../contexts/ProductContext";
 export default function create() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-  const [price, setPrice] = useState(0);
-  const [qty, setQty] = useState(0);
+  const [price, setPrice] = useState('');
+  const [qty, setQty] = useState('');
   const [spec, setSpec] = useState("");
 
   const [error, setError] = useState("");
@@ -15,14 +15,13 @@ export default function create() {
   const creds = { title, desc, price, qty, spec, imageUrl };
 
   function handleUpload(e) {
-    const file = e.target.files[0]
-    uploadImage(file)
+    const file = e.target.files[0];
+    uploadImage(file);
   }
-
 
   async function createProduct(e) {
     e.preventDefault();
-    if (title == "" || desc == "" || price == 0 || imageUrl == '') {
+    if (title == "" || desc == "" || price == 0 || imageUrl == "") {
       return setError("Fill all empty fields");
     }
     try {
@@ -116,7 +115,12 @@ export default function create() {
               className="input"
             />
           </div>
-          {prog && <progress value={prog} className='bg-teal-200 shadow-md w-full rounded-md py-2'></progress>}
+          {prog && (
+            <progress
+              value={prog}
+              className="bg-teal-200 shadow-md w-full rounded-md py-2"
+            ></progress>
+          )}
         </form>
 
         <button onClick={createProduct} className="regBtn">

@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import { collection, addDoc, query, onSnapshot } from "firebase/firestore";
 import { db, storage } from "./../firebase/Api";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
@@ -12,6 +12,7 @@ export function useProduct() {
 export function ProductProvider({ children }) {
   const [prog, setProg] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
+  const [items, setItems] = useState([]);
 
   function uploadImage(file) {
     const storageRef = ref(storage, `/images/${file.name}`);
@@ -37,11 +38,27 @@ export function ProductProvider({ children }) {
   }
 
   function addProduct(data) {
-    const docRef = addDoc(collection(db, "products"), data);
-    console.log("Document written with ID: ", docRef.id);
+    addDoc(collection(db, "products"), data);
+    console.log("Document written");
   }
 
-  const value = { addProduct, uploadImage, prog, imageUrl };
+  useEffect(() => {
+    const getProducts = [];
+    const q = query(collection(db, "products"));
+    const unSub = onSnapshot(q, (querySnapshot) => {
+      querySnapshot.docs.map((doc) => {
+        getProducts.push({
+          ...doc.data(),
+          Id: doc.id,
+        });
+      });
+      setItems(getProducts);
+      console.log(items);
+    });
+    return () => unSub();
+  }, []);
+
+  const value = { addProduct, uploadImage, prog, imageUrl, items };
 
   return (
     <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
